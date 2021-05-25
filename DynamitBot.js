@@ -13,11 +13,22 @@ class Bot {
         let val2;
         let val3;
 
+        let dynArray = [];
+
+        let dynamiteDiff1;
+        let dynamiteDiff2;
+        let dynamiteDiff3;
+        let booleanPatternDynamight = false;
+
+        let nextDynamight;
+        let counterI;
+
         // another counter for patterns. 
         // a counter that notices you only play rock - a counter that only looks at the last 3 moves.
         // if those are all rock then use paper. otherwise do the below. 
 
         for (let i = 0; i < rounds.length; i++) {
+            counterI=i;
             let p1Check = rounds[i].p1;
             if (p1Check === 'D') {
                 p1Count++;
@@ -25,8 +36,24 @@ class Bot {
             let p2Check = rounds[i].p2;
             if (p2Check === 'D') {
                 p2Count++;
+                dynArray.push(i);
+                
             }
         }
+
+        if(dynArray.length>6){
+            let dynArrayDiff1 = dynArray[dynArray.length-1] - dynArray[dynArray.length-2];
+            let dynArrayDiff2 = dynArray[dynArray.length-2] - dynArray[dynArray.length-3];
+            let dynArrayDiff3 = dynArray[dynArray.length-4] - dynArray[dynArray.length-5];
+    
+            // check difference 
+            if((dynArrayDiff1==dynArrayDiff2)&& (dynArrayDiff2==dynArrayDiff3)){
+                booleanPatternDynamight = true;
+                nextDynamight = dynArray.length-1 + dynArrayDiff3;
+            }
+        }
+
+
 
         // just count 3 as a process
         
@@ -46,8 +73,10 @@ class Bot {
             booleanPattern = true;
         }
 
-
-        if(booleanPattern){
+        if((booleanPatternDynamight)&&(counterI === nextDynamight)&&(p2Count<100)) {
+            return 'W';
+            
+        }else if(booleanPattern){
             // do switch
             switch (val3){
                 case "R":
