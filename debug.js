@@ -1,15 +1,10 @@
-let random = Math.floor(Math.random()*100);
-if (random<25){
-    console.log('R');
+switch (Math.floor(Math.random()*4)){
+    case 0:
+        console.log('R');
+    case 1:
+        console.log('P');
+    case 2:
+        console.log('S');
+    case 3:
+        console.log('W')
 }
-else if (random <50){
-    console.log('P');
-}
-else if (random < 75){
-    console.log('S');
-}
-else {
-    console.log('W')
-}
-
-console.log(random);
